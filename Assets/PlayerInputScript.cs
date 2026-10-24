@@ -8,11 +8,21 @@ public class PlayerInputScript : MonoBehaviour
     public SelectableScript selectedObject;
 
     public SelectableScript highlighted;
+    public MoveValidator highlightedMoveNode;
+    
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         selectables = GameObject.FindObjectsByType<SelectableScript>();
+        foreach(SelectableScript s in selectables)
+        {
+            s.playerInput = this;
+        }
+        foreach(MoveValidator m in GameObject.FindObjectsByType<MoveValidator>())
+        {
+            m.playerInput = this;
+        }   
     }
 
     // Update is called once per frame
@@ -30,6 +40,11 @@ public class PlayerInputScript : MonoBehaviour
         }
         else
         {
+            if(highlightedMoveNode != null)
+            {
+                selectedObject.moveTarget = new Vector3(highlightedMoveNode.transform.position.x, selectedObject.transform.parent.position.y, highlightedMoveNode.transform.position.z);
+        
+            }
             selectedObject?.deselect();
             selectedObject = null;
             

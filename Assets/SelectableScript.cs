@@ -11,15 +11,18 @@ public class SelectableScript : MonoBehaviour
 
     public PlayerInputScript playerInput;
 
+    public Vector3 moveTarget;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        moveTarget = this.transform.parent.position;
         playerInput = GameObject.FindObjectsByType<PlayerInputScript>()[0];
         foreach(Transform t in moveNodes.transform)
         {
-            t.GetComponent<MoveValidator>().basePosition = t.position;
-            t.GetComponent<MoveValidator>().hoverPosition = new Vector3(t.position.x, t.position.y + 0.1f, t.position.z);
-            t.GetComponent<MoveValidator>().targetPosition = t.position;
+                t.GetComponent<MoveValidator>().basePosition = t.localPosition;
+                t.GetComponent<MoveValidator>().hoverPosition = new Vector3(t.localPosition.x, t.localPosition.y + 0.1f, t.localPosition.z);
+                t.GetComponent<MoveValidator>().targetPosition = t.localPosition;
             t.gameObject.SetActive(false);
         }
     }
@@ -27,7 +30,10 @@ public class SelectableScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (moveTarget != null)
+        {
+            transform.parent.position = Vector3.MoveTowards(transform.parent.position, moveTarget, 5f * Time.deltaTime);
+        }
     }
 
     void OnMouseEnter()

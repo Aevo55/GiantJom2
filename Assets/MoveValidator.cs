@@ -25,16 +25,18 @@ public class MoveValidator : MonoBehaviour
         {
             this.gameObject.SetActive(false);
         }
-        transform.position = Vector3.MoveTowards(transform.position, targetPosition, 5f * Time.deltaTime);
+        transform.localPosition = Vector3.MoveTowards(transform.localPosition, targetPosition, 5f * Time.deltaTime);
     }
 
     void OnMouseEnter()
     {
         targetPosition = hoverPosition;
+        playerInput.highlightedMoveNode = this;
     }
 
     void OnMouseExit()
     {   
         targetPosition = basePosition;     
+        playerInput.highlightedMoveNode = null;
     }
 }
