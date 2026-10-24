@@ -2,29 +2,19 @@ using UnityEngine;
 
 public class House  : MonoBehaviour {
 
-    private MeshFilter meshFilter;
-    private Renderer meshRenderer;
-        
-    [SerializeField] private Mesh meshNormal;  
-    [SerializeField] private Mesh meshDestroyed;  
-
-    [SerializeField] private Material matNormal;
-    [SerializeField] private Material matDestroyed;
-
+    public GameObject meshNormal;  
+    public GameObject meshDestroyed;  
 
     void Start()
     {
-        meshFilter = GetComponent<MeshFilter>();
-        meshRenderer = GetComponent<Renderer>();
-
-        meshFilter.mesh = meshNormal;
-        meshRenderer.material = matNormal;
+        meshNormal.SetActive(true);
+        meshDestroyed.SetActive(false);
     }
 
     void Destroyed ()
     {
-        meshFilter.mesh = meshDestroyed;
-        meshRenderer.material = matDestroyed;
+        meshDestroyed.SetActive(true);
+        meshNormal.SetActive(false);
     }
 }
 
