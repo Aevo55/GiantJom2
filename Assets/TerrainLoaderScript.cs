@@ -21,6 +21,8 @@ public class TerrainLoaderScript : MonoBehaviour
         foreach(TileSpawnerScript t in terrain.transform.GetComponentsInChildren<TileSpawnerScript>())
         {
             tiles.Add(t.gameObject);
+            t.loc = t.transform.position;
+            t.gameObject.SetActive(false);
         }
         interval = loadTime / tiles.Count;
         shuffledTiles = tiles.OrderBy( x => Random.value ).ToList( );
@@ -36,7 +38,7 @@ public class TerrainLoaderScript : MonoBehaviour
             {
                 done = true;
             }
-            if(timeCount >= interval * currentTileIndex)
+            if(timeCount >= interval * (currentTileIndex+1))
             {   
                 shuffledTiles[currentTileIndex].SetActive(true);
                 shuffledTiles[currentTileIndex].transform.SetPositionAndRotation(new Vector3(shuffledTiles[currentTileIndex].transform.position.x, shuffledTiles[currentTileIndex].transform.position.y-20, shuffledTiles[currentTileIndex].transform.position.z), shuffledTiles[currentTileIndex].transform.rotation);

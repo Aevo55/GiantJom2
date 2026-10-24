@@ -5,13 +5,13 @@ public class TileSpawnerScript : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     
     public bool started = false;
+    public bool falling = false;
     private float speed = 30f;
 
-    private Vector3 loc;
+    public Vector3 loc;
     void Start()
     {
-        loc = this.transform.position;
-        this.gameObject.SetActive(false);
+
     }
 
     // Update is called once per frame
@@ -21,10 +21,18 @@ public class TileSpawnerScript : MonoBehaviour
         {
             transform.position = Vector3.MoveTowards(transform.position, loc, speed * Time.deltaTime);
         }
+        
+        if(falling) {
+            transform.position = Vector3.MoveTowards(transform.position, Vector3.down, speed * Time.deltaTime);
+        }
     }
 
     public void Spawn()
     {
         started = true;
+    }
+
+    public void isFalling(bool isFalling) {
+        falling = isFalling;
     }
 }
