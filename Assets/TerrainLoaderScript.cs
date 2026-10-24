@@ -22,11 +22,8 @@ public class TerrainLoaderScript : MonoBehaviour
         {
             tiles.Add(t.gameObject);
         }
-
         interval = loadTime / tiles.Count;
-
         shuffledTiles = tiles.OrderBy( x => Random.value ).ToList( );
-
     }
 
     // Update is called once per frame
@@ -46,13 +43,6 @@ public class TerrainLoaderScript : MonoBehaviour
                 shuffledTiles[currentTileIndex].GetComponent<TileSpawnerScript>().Spawn();
                 currentTileIndex++;
             }
-            
         }
-        
-    }
-
-    public void Load()
-    {
-        
     }
 }
