@@ -43,7 +43,11 @@ public class PlayerInputScript : MonoBehaviour
             if(highlightedMoveNode != null)
             {
                 selectedObject.moveTarget = new Vector3(highlightedMoveNode.transform.position.x, selectedObject.transform.parent.position.y, highlightedMoveNode.transform.position.z);
-        
+                highlightedMoveNode.GetComponent<MeshRenderer>().enabled = true;
+                highlightedMoveNode.GetComponent<BoxCollider>().enabled = true;
+                highlightedMoveNode.what.gameObject.SetActive(false);
+                highlightedMoveNode = null;
+                
             }
             selectedObject?.deselect();
             selectedObject = null;
