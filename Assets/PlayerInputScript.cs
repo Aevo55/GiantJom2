@@ -25,14 +25,12 @@ public class PlayerInputScript : MonoBehaviour
     {
         if(highlighted != null)
         {
-            highlighted.selected = true;
-            highlighted.selectionRing.SetActive(true);
+            highlighted.select();
             selectedObject = highlighted;
         }
         else
         {
-            selectedObject.selectionRing.SetActive(false);
-            selectedObject.selected = false;    
+            selectedObject?.deselect();
             selectedObject = null;
             
         }
